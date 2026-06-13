@@ -1,0 +1,23 @@
+name: Frontend Deployment
+
+on:
+  repository_dispatch:
+    types: [deploy-frontend]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Print event Information
+        runs: |
+          echo "Triggered by API repository"
+          echo "Environment: ${{ github.event.client_payload.environment }}"
+          echo "Version: ${{ github.event.client_payload.version }}"
+
+      - name: Deploy Frontend
+        runs: |
+          echo "Deploying Frontend..."
